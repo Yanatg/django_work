@@ -1,0 +1,17 @@
+{% extends 'app_general/components/base.html' %}
+
+{% block site_title %}subscription | {%  endblock %}
+
+{% block content %}
+
+<form action="{% url 'subscription' %}" method="post">
+    {% csrf_token %}
+    <h2>subscription</h2>
+    <p>subscribe to recieve our promotion</p>
+    {{ form.as_p }}
+    <div style="margin-bottom: 16px">
+        <button type="submit">submit</button>
+    </div>
+</form>
+
+{% endblock %}

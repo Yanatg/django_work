@@ -1,0 +1,24 @@
+{% extends 'app_general/components/base.html' %}
+{% block site_title %} {{ food.name }} | {%  endblock %}
+{% block content %}
+    {% if food is not null %}
+    <div>
+        <h3>{{ food.name }}</h3>
+        {% if food.special_price is not None %}
+                <p>
+                    <span>{{ food.special_price }} ฿</span>
+                    <del>{{ food.price }} ฿</del>
+                </p>
+            {% else %}
+                <p>{{ food.price }} ฿</p>
+            {% endif %}
+        {% if food.is_premium %}
+            <p>** premium menu</p>
+        {% endif %}
+        <p>{{ food.promotion_end_date }}</p>
+        <p>This is gedged icecream recommend menu</p>
+    </div>
+    {% else %}
+        <p>menu not found</p>
+    {% endif %}
+{% endblock %}

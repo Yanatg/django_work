@@ -1,0 +1,27 @@
+{% extends 'app_general/components/base.html' %}
+{% block site_title %}menus | {%  endblock %}
+
+{% block content %}
+<div>
+    <h2>icecream with joy</h2>
+    {% for food in foods %}
+        <div>
+            <h3><a href="{% url 'food' food.id %}">{{ food.name }}</a></h3>
+            {% if food.special_price is not None %}
+                <p>
+                    <span>{{ food.special_price }} ฿</span>
+                    <del>{{ food.price }} ฿</del>
+                </p>
+            {% else %}
+                <p>{{ food.price }} ฿</p>
+            {% endif %}
+            {%  if food.is_premium %}
+                <p>** premium menu</p>
+            {% endif %}
+            <p>{{ food.promotion_end_date }}</p>
+        </div>
+        {% empty %}
+            <p>no food</p>
+    {% endfor %}
+</div>
+{% endblock %}
