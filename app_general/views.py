@@ -1,10 +1,7 @@
-from django.shortcuts import render
-from app_foods.models import Food
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
-from app_general.forms import SubscriptionForm
-from .models import Subscription
+from app_general.forms import SubscriptionModelForm
 
 
 def home(request):
@@ -16,9 +13,12 @@ def about(request):
 
 
 def subscription(request):
-    if request.POST:
+    form = SubscriptionModelForm(request.POST)
+    if request.method == "POST":
+        form.save()
         return HttpResponseRedirect(reverse("subscription_thankyou"))
-    form = SubscriptionForm()
+    else:
+        form = SubscriptionModelForm()
     context = {"form": form}
     return render(request, "app_general/subscription_form.html", context)
 
