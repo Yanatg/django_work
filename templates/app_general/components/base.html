@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>{% block site_title %}{% endblock %}gedged icecream</title>
+    <link rel="icon" href="{% static 'app_general/all_images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'app_general/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'app_general/main.css' %}">
 </head>
 <body>
     {% include 'app_general/components/site_header.html' %}

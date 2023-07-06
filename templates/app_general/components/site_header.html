@@ -1,14 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>header</title>
-</head>
-<body>
-    <header style="background-color: lightgoldenrodyellow">
-        <a href="{% url 'home' %}">gedged icecream</a>
-        <a href="{% url 'foods' %}">เมนูทั้งหมด</a>
-        <a href="{% url 'about' %}">เกี่ยวกับเรา</a>
-    </header>
-</body>
-</html>
+{% load static %}
+<header class="site-header">
+  <div class="site-header-item">
+    <a class="site-header-brand" href="{% url 'home' %}">
+      {% if request.COOKIES.theme == "dark" %}
+        <img src="{% static 'app_general/all_images/logo-dark.png' %}">
+      {% else %}
+        <img src="{% static 'app_general/all_images/logo.png' %}">
+      {% endif %}
+      <span>ged's icecream</span>
+    </a>
+  </div>
+  <div class="site-header-menu">
+    <div class="site-header-item">
+      <a href="{% url 'foods' %}">
+        <span>เมนูทั้งหมด</span>
+      </a>
+    </div>
+    <div class="site-header-item">
+      <a href="{% url 'about' %}">
+        <span>เกี่ยวกับ</span>
+      </a>
+    </div>
+{#    {% if user.is_authenticated %}#}
+{#      <div class="site-header-item">#}
+{#        <a href="{% url 'dashboard' %}">#}
+{#          <span>{{ user.username }}</span>#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="site-header-item">#}
+{#        <form action="{% url 'logout' %}" method="post">#}
+{#          {% csrf_token %}#}
+{#          <button type="submit">#}
+{#            <span>ออกจากระบบ</span>#}
+{#          </button>#}
+{#        </form>#}
+{#      </div>#}
+{#    {% else %}#}
+{#      <div class="site-header-item">#}
+{#        <a href="{% url 'login' %}">#}
+{#          <span>เข้าสู่ระบบ</span>#}
+{#        </a>#}
+{#      </div>#}
+{#      <div class="site-header-item">#}
+{#        <a href="{% url 'register' %}">#}
+{#          <span>สมัครสมาชิก</span>#}
+{#        </a>#}
+{#      </div>#}
+{#    {% endif %}#}
+  </div>
+  <div class="site-header-item">
+    <a class="site-header-toggle-menu-button">
+      <span>MENU</span>
+    </a>
+  </div>
+</header>

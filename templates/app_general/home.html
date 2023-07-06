@@ -1,7 +1,36 @@
 {% extends 'app_general/components/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="container">
-        <h2>gedged icecream</h2>
+<section class="home-landing">
+  <h1 class="home-landing-text">ged's icecream</h1>
+  <h4 class="home-landing-text">ไอศครีมอร่อย ส่งบ่อย ส่งแม่น</h4>
+  <h6 class="home-landing-text">จัดส่งไอศครีมรสโปรดของคุณ</h6>
+  <p>
+    <a class="button" href="{% url 'foods' %}">ดูเมนูทั้งหมด</a>
+    <a class="button button-primary" href="{% url 'subscription' %}">ลงทะเบียนรับโปรโมชั่น</a>
+  </p>
+</section>
+<section class="content-section">
+  <div class="content-container">
+    <h3 class="content-title text-center">ged's icecream</h3>
+    <div class="grid grid-3">
+      <div>
+        <img class="image-block" src="{% static 'app_general/all_images/home-about-1.jpg' %}">
+        <p>ged's icream คือ บริการจัดส่งไอศครีมอร่อยถึงมือคุณ เดือนละครั้ง ในวันจันทร์ที่คุณสะดวกรับ</p>
+      </div>
+      <div>
+        <img class="image-block" src="{% static 'app_general/all_images/home-about-2.jpg' %}">
+        <p>ged's rider คือ พนักงานส่งไอศครีม ขี่ไวแบบไม่ย้อนศร และฉีดวัคซีนครบ 2 เข็มแล้วทุกคน</p>
+      </div>
+      <div>
+        <img class="image-block" src="{% static 'app_general/all_images/home-about-3.jpg' %}">
+        <p>ไอศครีมทุกรสรังสรรค์ขึ้นมาอย่างพิถีพิถัน ไม่หวั่นแม้ออเดอร์มามาก</p>
+      </div>
     </div>
+    <p class="text-center">
+      <a class="button" href="{% url 'about' %}">เกี่ยวกับ ged's icecream</a>
+    </p>
+  </div>
+</section>
 {% endblock %}

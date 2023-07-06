@@ -13,3 +13,7 @@ class Subscription(models.Model):
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default="unapprove")
     registered_date = models.DateTimeField(auto_now_add=True)
     food_set = models.ManyToManyField("app_foods.Food")
+
+    def __str__(self):
+        return self.name
+
