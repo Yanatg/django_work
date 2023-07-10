@@ -23,32 +23,33 @@
         </div>
 
         {% if user.is_authenticated %}
-        <div class="site-header-item">
-            <a href="#">
-                <span>{{ user.username }}</span>
-            </a>
-        </div>
-        <div class="site-header-item">
-            <a href="{% url 'logout' %}">
-                <span>ออกจากระบบ</span>
-            </a>
-        </div>
+            <div class="site-header-item">
+                <a href="#">
+                    <span>{{ user.username }}</span>
+                </a>
+            </div>
+            <div class="site-header-item">
+                <a href="{% url 'logout' %}">
+                    <span>ออกจากระบบ</span>
+                </a>
+            </div>
         {% else %}
-        <div class="site-header-item">
-            <a href="{% url 'login' %}">
-                <span>เข้าสู่ระบบ</span>
-            </a>
-        </div>
-        <div class="site-header-item">
-            <a href="#">
-                <span>สมัครสมาชิก</span>
-            </a>
-        </div>
+            <div class="site-header-item">
+                <a href="{% url 'login' %}">
+                    <span>เข้าสู่ระบบ</span>
+                </a>
+            </div>
+            <div class="site-header-item">
+                <a href="{% url 'register' %}">
+                    <span>สมัครสมาชิก</span>
+                </a>
+            </div>
         {% endif %}
 
-  <div class="site-header-item">
-    <a class="site-header-toggle-menu-button">
-      <span>MENU</span>
-    </a>
-  </div>
+        <div class="site-header-item">
+            <a class="site-header-toggle-menu-button">
+                <span>MENU</span>
+            </a>
+        </div>
+    </div>
 </header>
