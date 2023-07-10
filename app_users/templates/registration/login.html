@@ -1,0 +1,18 @@
+{% extends 'app_general/components/base.html' %}
+
+{% block site_title %}about | {%  endblock %}
+
+{% block content %}
+    <section class="content-section content-section-single">
+    <div class="content-section content-section-single">
+        <h2>login</h2>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>
+                <button class="button button-primary" type="submit">login</button>
+            </p>
+        </form>
+    </div>
+    </section>
+{% endblock %}

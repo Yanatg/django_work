@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "app_general.apps.AppGeneralConfig",
     "app_foods.apps.AppFoodConfig",
+    "app_users.apps.AppUsersConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -127,3 +128,8 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Authentication
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
