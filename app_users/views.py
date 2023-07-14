@@ -3,6 +3,7 @@ from .forms import RegisterForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 from django.contrib.auth import login, authenticate
@@ -24,3 +25,9 @@ def register(request: HttpRequest):
     # Get request
     context = {"form": form}
     return render(request, "app_users/register.html", context)
+
+
+@login_required
+def dashboard(request: HttpRequest):
+    return render(request, "app_users/dashboard.html")
+

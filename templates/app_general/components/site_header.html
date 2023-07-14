@@ -24,7 +24,7 @@
 
         {% if user.is_authenticated %}
             <div class="site-header-item">
-                <a href="#">
+                <a href={% url 'dashboard' %}>
                     <span>{{ user.username }}</span>
                 </a>
             </div>
