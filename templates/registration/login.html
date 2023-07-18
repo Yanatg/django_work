@@ -6,15 +6,15 @@
     <section class="content-section content-section-single">
     <div class="content-section content-section-single">
         <h2>login</h2>
-        <form action="{% url 'login' %}" method="post">
+        <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
             {% endif %}
-            <p>
+            <div class="form-field">
                 <button class="button button-primary" type="submit">login</button>
-            </p>
+            </div>
         </form>
     </div>
     </section>

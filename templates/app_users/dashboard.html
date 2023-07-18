@@ -5,7 +5,13 @@
 {% block content %}
     <section class="content-section content-section-single">
         <div class="content-container content-container-narrow">
-            <h3 class="content-container">dashboard</h3>
+            <h3 class="content-container">Hello {{ user.username }}</h3>
+            <p>
+                <a href="{% url 'dashboard' %}">dashboard</a>
+                <a href="{% url 'profile' %}">profile</a>
+            </p>
+            <h5>dashboard</h5>
+
         </div>
     </section>
 {% endblock %}

@@ -4,9 +4,9 @@
 
 {% block content %}
     <section class="content-section content-section-single">
-        <div class="content-section content-section-single">
+        <div class="content-section content-section-narrow">
             <h2>register</h2>
-            <form action="{% url 'register' %}" method="post">
+            <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
             <div class="form-field">
                 {{ form.username.label_tag }}
