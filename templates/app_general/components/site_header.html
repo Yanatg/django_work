@@ -13,12 +13,12 @@
         </div>
         <div class="site-header-item">
             <a href="{% url 'foods' %}">
-                <span>เมนูทั้งหมด</span>
+                <span>menu</span>
             </a>
         </div>
         <div class="site-header-item">
             <a href="{% url 'about' %}">
-                <span>เกี่ยวกับ</span>
+                <span>about</span>
             </a>
         </div>
 
@@ -30,18 +30,18 @@
             </div>
             <div class="site-header-item">
                 <a href="{% url 'logout' %}">
-                    <span>ออกจากระบบ</span>
+                    <span>log out</span>
                 </a>
             </div>
         {% else %}
             <div class="site-header-item">
                 <a href="{% url 'login' %}">
-                    <span>เข้าสู่ระบบ</span>
+                    <span>log in</span>
                 </a>
             </div>
             <div class="site-header-item">
                 <a href="{% url 'register' %}">
-                    <span>สมัครสมาชิก</span>
+                    <span>register</span>
                 </a>
             </div>
         {% endif %}
