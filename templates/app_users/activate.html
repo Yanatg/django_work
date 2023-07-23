@@ -1,0 +1,16 @@
+{% extends 'app_general/components/base.html' %}
+
+{% block site_title %}Activate account done | {%  endblock %}
+
+{% block content %}
+    <section class="content-section content-section-single">
+    <div class="content-section content-section-single">
+        <h1>Activate account done</h1>
+        <p>you can log in now</p>
+        <p>{{ description }}</p>
+        <p>
+            <a class="button button-primary" href="{% url 'login' %}">log in</a>
+        </p>
+    </div>
+    </section>
+{% endblock %}

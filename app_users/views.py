@@ -3,8 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-
+from app_users.models import CustomUser
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from app_users.forms import ExtendedProfileForm, RegisterForm, UserProfileForm
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from app_users.utilts.activation_token_generator import activation_token_generator
+from django.utils.encoding import force_bytes
 
 # Create your views here.
 
@@ -15,9 +20,32 @@ def register(request: HttpRequest):
         form = RegisterForm(request.POST)
         if form.is_valid():
             # Register & Login
-            user = form.save()
-            login(request, user)
-            return HttpResponseRedirect(reverse("home"))
+
+            # register user
+            user: CustomUser = form.save(commit=False)
+            user.is_active = False
+            user.save()
+
+            # login(request, user)
+
+            # build email body HTML
+            context = {
+                "protocol": request.scheme,
+                "host": request.get_host(),
+                "uidb64": urlsafe_base64_encode(force_bytes(user.id)),
+                "token": activation_token_generator.make_token(user),
+            }
+            email_body = render_to_string("app_users/activate_email.html", context)
+
+            # send email
+            email = EmailMessage(
+                to=[user.email],
+                subject="Activate your account",
+                body="Click the link below to activate your account\n"
+            )
+            email.send()
+            # redirect to thankyou page
+            return HttpResponseRedirect(reverse("register_thankyou"))
     else:
         form = RegisterForm()
 
@@ -25,6 +53,33 @@ def register(request: HttpRequest):
     context = {"form": form}
     return render(request, "app_users/register.html", context)
 
+
+def register_thankyou(request: HttpRequest):
+    return render(request, "app_users/register_thankyou.html")
+
+
+def activate(request: HttpRequest, uidb64: str, token: str):
+    # decode user id
+    id = urlsafe_base64_decode(uidb64).decode("utf-8")
+    title = "Activate your account"
+    description = "login to your account"
+    try:
+        user: CustomUser = CustomUser.objects.get(id=id)
+        activated = activation_token_generator.check_token(CustomUser, token)
+        if not activated:
+            raise Exception("Invalid token")
+        CustomUser.is_active = True
+        CustomUser.save()
+    except:
+        print("User not found")
+        title = "Invalid activation link"
+        description = "Please try again"
+
+    context = {
+        "title": title,
+        "description": description
+    }
+    return render(request, "app_users/activate.html", context)
 
 @login_required
 def dashboard(request: HttpRequest):
