@@ -41,7 +41,7 @@ def register(request: HttpRequest):
             email = EmailMessage(
                 to=[user.email],
                 subject="Activate your account",
-                body="Click the link below to activate your account\n"
+                body=email_body,
             )
             email.send()
             # redirect to thankyou page
@@ -60,26 +60,27 @@ def register_thankyou(request: HttpRequest):
 
 def activate(request: HttpRequest, uidb64: str, token: str):
     # decode user id
-    id = urlsafe_base64_decode(uidb64).decode("utf-8")
+    id = urlsafe_base64_decode(uidb64).decode()
     title = "Activate your account"
-    description = "login to your account"
+    content = "login to your account"
     try:
         user: CustomUser = CustomUser.objects.get(id=id)
-        activated = activation_token_generator.check_token(CustomUser, token)
+        activated = activation_token_generator.check_token(user, token)
         if not activated:
             raise Exception("Invalid token")
-        CustomUser.is_active = True
-        CustomUser.save()
+        user.is_active = True
+        user.save()
     except:
         print("User not found")
         title = "Invalid activation link"
-        description = "Please try again"
+        content = "Please try again"
 
     context = {
         "title": title,
-        "description": description
+        "description": content
     }
     return render(request, "app_users/activate.html", context)
+
 
 @login_required
 def dashboard(request: HttpRequest):
