@@ -12,6 +12,35 @@
                 <a href="{% url 'password_change' %}">change password</a>
             </p>
             <h5>dashboard</h5>
+            <h5>favourite food</h5>
+            {% for food_pivot in favourite_food_pivot %}
+                {% with food=food_pivot.food %}
+                    <div>
+                        <h3>{{ food.name }}</h3>
+                        <p>{{ food_pivot.level_label }}</p>
+                        {% if food.special_price is not None %}
+                            <p>
+                                <b>{{ food.special_price|floatformat:'g' }} baht</b>
+                                <del class="text-gray">{{ food.price|floatformat:'g' }} baht</del>
+                            </p>
+                        {% else %}
+                            <p><b>{{ food.price|floatformat:'g' }} บาท</b></p>
+                        {% endif %}
+                        {% if food.is_premium %}
+                            <p>*** Premium</p>
+                        {% endif %}
+                        {% if food.promotion_end_date is not None %}
+                            <p>promotion end at {{ food.promotion_end_date|date:'j N Y' }}</p>
+                        {% endif %}
+                        <form action="{% url 'unfavourite_food' food.id %}" method="post">
+                            {% csrf_token %}
+                            <p>
+                                <button type="submit">delete</button>
+                            </p>
+                        </form>
+                    </div>
+                {% endwith %}
+            {% endfor %}
 
         </div>
     </section>
